@@ -1,11 +1,11 @@
 // scripts/generate.js
-import { promises as fs } from 'fs';
-import path from 'path';
-import { URL } from 'url';
-import https from 'https';
+const fs = require('fs').promises;
+const path = require('path');
+const { URL } = require('url');
+const https = require('https');
 
 const BUILD_DIR = 'build';
-const CONFIG_PATH = '_config.json';
+const CONFIG_PATH = 'config.json';
 
 async function main() {
   const raw = await fs.readFile(CONFIG_PATH, 'utf8');
