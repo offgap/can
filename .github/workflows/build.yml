@@ -1,7 +1,7 @@
 on:
   push:
     paths:
-      - '_config.json'
+      - 'config.json'
 
 jobs:
   build:
@@ -16,7 +16,7 @@ jobs:
           node-version: '16'
 
       - name: generate site from config
-        run: node _build.js
+        run: node build.js
 
       - name: copy static assets
         run: |
