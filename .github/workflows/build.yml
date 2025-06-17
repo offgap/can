@@ -1,0 +1,41 @@
+on:
+  push:
+    paths:
+      - '_config.json'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+
+      - name: setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      - name: install deps
+        run: npm ci
+
+      - name: generate site from config
+        run: node scripts/generate.js
+
+      - name: copy static assets
+        run: |
+          mkdir -p build/static
+          cp -R static/* build/static/
+
+      - name: upload pages artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: build
+
+      - name: deploy to pages
+        uses: actions/deploy-pages@v1
+
+      - name: notify frontend
+        run: |
+          curl -X POST ${{ secrets.WEBHOOK_URL }} \
+            -H "Content-Type: application/json" \
+            -d '{"status":"deployed"}'
