@@ -1,13 +1,13 @@
 {
   "project": {
-    "cname": "user.offgap.com",
+    "cname": "wiki.offgap.com",
     "sitemap": "/sitemap.xml",
     "robots": "/robots.txt"
   },
   "meta": {
     "title": "My Blog",
     "description": "A blog about tech and life",
-    "canonical": "https://user.offgap.com/",
+    "canonical": "https://wiki.offgap.com/",
     "headTags": [
       "<meta name=\"author\" content=\"username\">",
       "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">"
