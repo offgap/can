@@ -15,16 +15,13 @@ jobs:
         with:
           node-version: '16'
 
-      - name: install deps
-        run: npm ci
-
       - name: generate site from config
-        run: node scripts/generate.js
+        run: node _build.js
 
       - name: copy static assets
         run: |
           mkdir -p build/static
-          cp -R static/* build/static/
+          cp -R static/* build/
 
       - name: upload for Pages
         uses: actions/upload-artifact@v4
