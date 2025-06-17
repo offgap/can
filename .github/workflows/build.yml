@@ -26,16 +26,16 @@ jobs:
           mkdir -p build/static
           cp -R static/* build/static/
 
-      - name: upload pages artifact
-        uses: actions/upload-pages-artifact@v1
+      - name: upload for Pages
+        uses: actions/upload-artifact@v4
         with:
           path: build
 
-      - name: deploy to pages
+      - name: deploy to Pages
         uses: actions/deploy-pages@v1
 
-      - name: notify frontend
-        run: |
-          curl -X POST ${{ secrets.WEBHOOK_URL }} \
-            -H "Content-Type: application/json" \
-            -d '{"status":"deployed"}'
+      #- name: notify frontend
+      #  run: |
+      #    curl -X POST ${{ secrets.WEBHOOK_URL }} \
+      #      -H "Content-Type: application/json" \
+      #      -d '{"status":"deployed"}'
