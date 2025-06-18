@@ -1,37 +1,44 @@
+name: Build and Deploy to GitHub Pages
+
 on:
   push:
     paths:
       - 'config.json'
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: checkout
+      - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: setup node
-        uses: actions/setup-node@v3
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          node-version: '16'
+          node-version: '20'
 
-      - name: generate site from config
+      - name: Generate static site
         run: node build.js
 
-      - name: copy static assets
+      - name: Copy static assets (optional)
         run: |
           mkdir -p build/static
-          cp -R static/* build/
+          cp -R static/* build/ || true
 
-      - name: upload for Pages
-        uses: actions/upload-artifact@v4
+      - name: Upload artifact for GitHub Pages
+        uses: actions/upload-pages-artifact@v2
         with:
           path: build
 
-      - name: deploy to Pages
-        uses: actions/deploy-pages@v1
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v2
 
-      #- name: notify frontend
+      #- name: Notify frontend
       #  run: |
       #    curl -X POST ${{ secrets.WEBHOOK_URL }} \
       #      -H "Content-Type: application/json" \
