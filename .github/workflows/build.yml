@@ -30,7 +30,7 @@ jobs:
           node-version: '20'
 
       - name: Generate static site
-        run: node build.js
+        run: node /.github/workflows/build.js
 
       - name: Copy static assets (optional)
         run: |
@@ -45,9 +45,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
-
-      #- name: Notify frontend
-      #  run: |
-      #    curl -X POST ${{ secrets.WEBHOOK_URL }} \
-      #      -H "Content-Type: application/json" \
-      #      -d '{"status":"deployed"}'
